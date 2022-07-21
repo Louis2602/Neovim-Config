@@ -2,15 +2,15 @@
 " => General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=a 				" Enable mouse
-set tabstop=4 				 
-set shiftwidth=4 			 
-set listchars=tab:\¦\ 		" Tab charactor 
+set tabstop=4
+set shiftwidth=4
+set listchars=tab:\¦\ 		" Tab charactor
 set list
-set foldmethod=indent 		 
-set foldlevelstart=99 		  
+set foldmethod=indent
+set foldlevelstart=99
 set number 					" Show line number
 set relativenumber
-set ignorecase 				" Enable case-sensitive 
+set ignorecase 				" Enable case-sensitive
 set smartindent
 set autoindent
 set incsearch
@@ -74,6 +74,7 @@ map sl <C-w>l
 nmap nt :bnext<Return>
 nmap pt :bprevious<Return>
 nmap ct :bd<Return>
+let mapleader=" "
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin list
