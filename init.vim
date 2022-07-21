@@ -71,7 +71,9 @@ map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
-
+nmap nt :bnext<Return>
+nmap pt :bprevious<Return>
+nmap ct :bd<Return>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin list
@@ -170,7 +172,7 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 
 hi Visual guibg=#33467c
-hi CursorLineNr guifg=#e2ea43
+hi CursorLineNr guifg=#ffdc3f
 hi Comment guifg=#728083
 hi LineNr guifg=#728083
 hi CursorLine guibg=#292e42
