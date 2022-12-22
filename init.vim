@@ -61,8 +61,9 @@ autocmd FileChangedShellPost *
 " Split window
 nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
+nmap ct :bd<Return><C-w>w
 " Move window
-nmap <Space> <C-w>w
+nmap <Space> <C-w>
 map s<left> <C-w>h
 map s<up> <C-w>k
 map s<down> <C-w>j
@@ -84,6 +85,7 @@ call plug#begin(stdpath('config').'/plugged')
 	Plug 'joshdick/onedark.vim', 					" Dark theme
 	Plug 'norcalli/nvim-colorizer.lua'
 	Plug 'p00f/nvim-ts-rainbow'
+	Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " Code Formatter
 	Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
@@ -106,6 +108,12 @@ call plug#begin(stdpath('config').'/plugged')
 " Vim snip
     Plug 'hrsh7th/vim-vsnip'
     Plug 'hrsh7th/vim-vsnip-integ'
+	Plug 'pangloss/vim-javascript'
+	Plug 'mxw/vim-jsx'
+" Ultisnips
+	Plug 'SirVer/ultisnips'
+" React code snippets
+	Plug 'epilande/vim-react-snippets'
 
 " Vim Icon
 	Plug 'onsails/lspkind-nvim'
@@ -142,24 +150,26 @@ call plug#end()
 
 " Theme
 syntax on
-let g:onedark_config = {
-    \ 'style': 'dark',
-\}
-let g:onedark_hide_endofbuffer=1
-let g:onedark_terminal_italics=0
-let g:onedark_termcolors=256
-if (has("autocmd") && !has("gui_running"))
-  augroup colorset
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
-  augroup END
-endif
+" let g:onedark_config = {
+"     \ 'style': 'dark',
+" \}
+" let g:onedark_hide_endofbuffer=1
+" let g:onedark_terminal_italics=0
+" let g:onedark_termcolors=256
 
-colorscheme onedark
+" if (has("autocmd") && !has("gui_running"))
+"   augroup colorset
+"     autocmd!
+"     let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+"     " autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+"   augroup END
+" endif
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<c-l>"
 
 " Status bar
-let g:airline_theme='onedark'
+let g:airline_theme='night_owl'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -167,17 +177,32 @@ let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
 
+" Close tag
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx'
+let g:closetag_xhtml_filetypes = '*.xhtml,*.jsx'
+let g:closetag_filetypes = 'html,xhtml,phtml,jsx'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+let g:closetag_shortcut = '>'
+let g:closetag_enable_react_fragment = 1
+
 " c++ syntax highlighting
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 
 " hi Visual guibg=#33467c
-hi Visual guibg=#263d55
+" hi Visual guibg=#263d55
 " hi CursorLineNr guifg=#ffdc3f
-hi Comment guifg=#728083
-hi LineNr guifg=#728083
-hi CursorLine guibg=#292e42
+" hi Comment guifg=#728083
+" hi LineNr guifg=#728083
+" hi CursorLine guibg=#2c3740
 
 " Disable automatic comment in newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -190,6 +215,9 @@ luafile ~\AppData\Local\nvim\lua\cmp-config.lua
 luafile ~\AppData\Local\nvim\lua\nvim-lspconfig.lua
 luafile ~\AppData\Local\nvim\lua\diagnostic_signs.lua
 luafile ~\AppData\Local\nvim\lua\language_servers.lua
+luafile ~\AppData\Local\nvim\lua\tokyonight_colorscheme.lua
+
+colorscheme tokyonight
 
 " Vim Files
 source  ~\AppData\Local\nvim\settings\floaterm.vim
